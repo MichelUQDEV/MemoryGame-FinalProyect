@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria</title>
+    <!-- Enlace a los estilos principales -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Enlace al manifest para PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+    <!-- Pantalla de inicio: selección de dificultad y botones extra -->
+    <main>
+        <section id="welcome-screen">
+            <h1>Juego de Memoria</h1>
+            <!-- Ícono principal del juego -->
+            <img src="img/memory-icon.png" alt="Icono de juego de memoria" id="game-icon">
+            
+            <!-- Botones para elegir dificultad -->
+            <div id="difficulty-buttons">
+                <button class="difficulty-button" id="easy-button">Fácil</button>
+                <button class="difficulty-button" id="medium-button">Intermedio</button>
+                <button class="difficulty-button" id="hard-button">Difícil</button>
+            </div>
+
+            <!-- Botones para instrucciones y acerca de -->
+            <div id="extra-buttons">
+                <button id="instructions-button" class="circle-button">?</button>
+                <button id="about-button" class="circle-button">i</button>
+            </div>
+        </section>
+
+        <!-- Contenedor del tablero de juego y controles -->
+        <section id="game-section" style="display:none;">
+            <div id="game-board"></div>
+            <div id="controls">
+                <span id="moves-counter">Movimientos: 0</span>
+                <span id="timer">Tiempo: 0s</span>
+                <button id="restart-button" style="display:none;">Volver al inicio</button>
+            </div>
+        </section>
+        
+        <!-- Modal de instrucciones -->
+        <div id="instructions-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h2>¿Cómo jugar?</h2>
+                <div class="instructions-text">
+                    <ol>
+                        <li>Selecciona la dificultad deseada.</li>
+                        <li>Haz clic en dos cartas para voltearlas.</li>
+                        <li>Si las cartas coinciden, permanecerán descubiertas.</li>
+                        <li>Si no coinciden, se volverán a ocultar.</li>
+                        <li>Encuentra todas las parejas en el menor tiempo posible.</li>
+                    </ol>
+                    <p>¡Buena suerte y diviértete!</p>
+                </div>
+                <button id="accept-instructions" class="accept-modal">Aceptar</button>
+            </div>
+        </div>
+        <!-- Modal de acerca de -->
+        <div id="about-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h2>Acerca del Proyecto</h2>
+                <div class="instructions-text">
+                    <p><strong>Juego de Memoria</strong> es un proyecto educativo desarrollado como parte de la creacion de una <strong>Aplicación Web Progresiva (PWA)</strong>. El objetivo es ejercitar la memoria y la concentración a través de un juego interactivo y divertido.</p>
+                    <ul>
+                        <li>Desarrollado por: <br>Michel Ashley</li>
+                        <li>Fecha: <br>Mayo 2025</li>
+                        <li>Tecnologías: <br> HTML, CSS, JavaScript</li>
+                    </ul>
+                    <p>Este proyecto fue creado con fines academicos. Para más informacion consulta el <strong>README.MD</strong> para saber más de este proyecto.</p>
+                </div>
+                <button id="accept-about" class="accept-modal">Aceptar</button>
+            </div>
+        </div>
+
+        <!-- Modal de conclusión del juego completamente a pantalla completa -->
+        <div id="finish-modal" class="modal finish-modal" style="display:none;">
+            <div class="modal-content finish-modal-content" style="width:100vw; height:100vh; max-width:none; max-height:none; border-radius:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#43c97f;">
+                <img src="img/finish.png" alt="Juego terminado" class="finish-img" style="width:120px; margin-bottom:2rem;">
+                <h2 style="color:#fff; font-size:2.2rem; margin-bottom:1.2rem; text-align: center;">¡Juego completado!</h2>
+                <p id="finish-description" style="font-size:1.3rem; color:#fff; margin-bottom:2.5rem;">Completaste el juego en <span id="finish-moves"></span> movimientos y <span id="finish-time"></span> segundos.</p>
+                <button id="finish-restart" class="accept-modal" style="background:#fff; color:#43c97f; font-size:1.2rem; padding:1rem 2.5rem; border-radius:8px; font-weight:bold;">Volver al inicio</button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Script principal del juego -->
+    <script src="script.js"></script>
+    <!-- Registro del Service Worker para PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js').then(function(registration) {
+                // Registro exitoso
+                console.log('ServiceWorker registrado con éxito:', registration.scope);
+            }, function(err) {
+                // Fallo en el registro
+                console.log('ServiceWorker fallo en el registro:', err);
+            });
+            });
+        }
+    </script>
+</body>
+</html>
