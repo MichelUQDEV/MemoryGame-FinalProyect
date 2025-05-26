@@ -162,6 +162,12 @@ El Service Worker gestiona tres eventos principales:
 - `/js/script.js`
 - Imágenes de íconos y fondos
 
+## Restricción de orientación (solo vertical)
+- La aplicación está diseñada únicamente para usarse en modo vertical en dispositivos móviles.
+- Si el usuario gira el dispositivo a modo horizontal, se muestra un mensaje a pantalla completa solicitando volver a modo vertical (funciona en Android y iOS).
+- En el archivo `manifest.webmanifest` se ha añadido la propiedad `"orientation": "portrait"` para reforzar la restricción en navegadores compatibles.
+- La detección y el mensaje se implementan en `script.js` mediante un overlay a pantalla completa.
+
 ## Notas adicionales
 - El Service Worker está diseñado para aplicaciones tipo PWA (Progressive Web App).
 - Mejora la experiencia offline y la velocidad de carga.
