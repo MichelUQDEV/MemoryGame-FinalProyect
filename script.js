@@ -305,4 +305,36 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 400);
         }
     });
+
+    // Overlay para orientación
+    const orientationOverlay = document.createElement('div');
+    orientationOverlay.id = 'orientation-overlay';
+    orientationOverlay.style.position = 'fixed';
+    orientationOverlay.style.top = 0;
+    orientationOverlay.style.left = 0;
+    orientationOverlay.style.width = '100vw';
+    orientationOverlay.style.height = '100vh';
+    orientationOverlay.style.background = 'rgba(44,62,80,0.97)';
+    orientationOverlay.style.color = '#fff';
+    orientationOverlay.style.display = 'none';
+    orientationOverlay.style.zIndex = 9999;
+    orientationOverlay.style.justifyContent = 'center';
+    orientationOverlay.style.alignItems = 'center';
+    orientationOverlay.style.flexDirection = 'column';
+    orientationOverlay.style.fontFamily = 'Poppins, Roboto, sans-serif';
+    orientationOverlay.style.fontSize = '2rem';
+    orientationOverlay.style.textAlign = 'center';
+    orientationOverlay.innerHTML = '<span style="font-size:3.5rem;">🔄</span><br>Por favor, gira tu dispositivo<br><b>y usa la app en modo vertical</b>';
+    document.body.appendChild(orientationOverlay);
+
+    function checkOrientation() {
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            orientationOverlay.style.display = 'flex';
+        } else {
+            orientationOverlay.style.display = 'none';
+        }
+    }
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+    checkOrientation();
 });
